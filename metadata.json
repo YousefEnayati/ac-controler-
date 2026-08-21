@@ -1,0 +1,6 @@
+{
+  "name": "AC Controller",
+  "description": "An Android application that controls an Air Conditioner over the internet using the MQTT protocol.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
