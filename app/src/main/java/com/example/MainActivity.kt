@@ -2377,8 +2377,10 @@ fun LoginScreen(viewModel: MqttViewModel, navController: NavController, sharedPr
 
         Button(
             onClick = {
-                val user = users.find { it.username == username && it.password == password }
-                if (user != null) {
+                val isMqttUser = users.any { it.username == username && it.password == password }
+                val isOfflineAdmin = (username == "admin" && password == "admin")
+                
+                if (isMqttUser || isOfflineAdmin) {
                     sharedPref.edit()
                         .putBoolean("is_logged_in", true)
                         .putString("logged_in_username", username)
@@ -2409,6 +2411,12 @@ fun LoginScreen(viewModel: MqttViewModel, navController: NavController, sharedPr
         if (status == "Connected" && users.isEmpty()) {
             Text(
                 text = "Fetching users...",
+                fontSize = 12.sp,
+                color = Color.Gray
+            )
+        } else if (status != "Connected") {
+            Text(
+                text = "Offline mode (Use admin / admin)",
                 fontSize = 12.sp,
                 color = Color.Gray
             )
